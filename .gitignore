@@ -12,8 +12,6 @@ models/*
 ## images
 *.gif
 **/*.gif
-*.png
-**/*.png
 
 ## data files
 *.p
