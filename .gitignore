@@ -3,6 +3,7 @@
 /Missing Packages/*
 .ipynb_checkpoints/*
 notebooks/*
+models/*
 
 ## archives
 *.zip
