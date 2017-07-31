@@ -1,6 +1,6 @@
-#**Traffic Sign Recognition** 
+# **Traffic Sign Recognition** 
 
-##Project Report
+## Project Report
 
 [//]: # (Image References)
 
@@ -20,9 +20,9 @@
 
 The code for this project can be found [on GitHub](https://github.com/fazzolini/CarND-Term1-P2).
 
-###Data Set Summary & Exploration
+### Data Set Summary & Exploration
 
-####1. Basic summary of the data set.
+#### 1. Basic summary of the data set.
 
 In order to calculate summary statistics for the data set, I used numpy library. The results are as follows:
 
@@ -32,7 +32,7 @@ In order to calculate summary statistics for the data set, I used numpy library.
 * The shape of a traffic sign image is 32x32x3. This means that each picture is 32 pixels wide, 32 pixels tall, and has 3 color channels.
 * The number of unique classes/labels in the data set is 43.
 
-####2. Exploratory visualization of the dataset.
+#### 2. Exploratory visualization of the dataset.
 
 First of all, I decided to plot some random traffic signs from the train data set. To do that, I generated random indices, retreived 25 corresponding images and then plotted them. Visualization can be seen below. The first thing that caught my attention was that lighting conditions under which the photos were taken can vary quite drastically. Some of the photos are really hard to tell apart because the lighting was so dark. I consider this can be a challenge for a neural network.
 
@@ -44,9 +44,9 @@ Another part that is really important for any classification task is the possibl
 
 It is clear that there are quite unbalanced classes in the data set. This means that the model might learn well good represented classes and might not learn well under-represented classes. In order to solve this issue, I balanced the classes in such a way that all of them have equal number of images.
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
-####1. Image preprocessing. 
+#### 1. Image preprocessing. 
 
 The first step that I took in data preprocessing was **normalizing** all the pictures by substracting mean value and dividing by the standard deviation of the mean value. This normalization was performed for each of 3 of the color channels. This approach was inspired by the famous [VGG19 paper](https://arxiv.org/pdf/1409.1556.pdf) that won prestigious ImageNet competition in 2014. I normalized all train, validation and test data sets using this approach. An important consideration was data leakage, so the mean and SD values used for all normalization were calculated only based on the training data set, and **not** validation or test data. 
 
@@ -58,7 +58,7 @@ After augmentation/balancing, each class has 2010 images, which is how many imag
 
 ![alt text][hist2]
 
-####2. Model architecture.
+#### 2. Model architecture.
 
 My final model consisted of the following layers:
 
@@ -95,7 +95,7 @@ Another point of attention should be max pooling layers. The first convolutional
 
 Apart from these 2 points, I do not think that anything else stands out about this architecture.
 
-####3. Training the model.
+#### 3. Training the model.
 
 To train the model, I made the following decisions:
 
@@ -104,7 +104,7 @@ To train the model, I made the following decisions:
 * Batch size of 32. I was getting out of memory errors when trying to make this value larger, so I decided to stop at 32.
 * Number of epochs was 201. Since one epoch trained relatively fast (14 seconds on average), I could afford to run it for longer and see if it converges to some value (which it did). 
 
-####4. Finding the final solution.
+#### 4. Finding the final solution.
 
 In the graph below, the blue line represents training accuracy and the orange line represents validation accuracy. In the beginning of the training, validation accuracy is higher than training accuracy. This is the result of using dropout. This reduces training accuracy and prevents overfitting. Using dropout additionally reduces the gap between training and validation accuracy, which is good. On the downside, training requires more epochs to converge.
 
@@ -133,9 +133,9 @@ I played quite a bit with different parameters, witch very little effect until I
 Finally, training, validation and test accuracy are all realtively close to each other, and all are higher than 0.93. This means that my model is working and can be expected to perform better than 93% on a relatively large data set of unseen images.
 
 
-###Test a Model on New Images
+### Test a Model on New Images
 
-####1. New German traffic signs.
+#### 1. New German traffic signs.
 
 Here are six German traffic signs that I found on the web:
 
@@ -146,7 +146,7 @@ I cut them manually from Google maps, this is why they are all different sizes. 
 
 All the signs photos look like they should not be a challenge for the model to classify. None of them were taken in low light conditions. Neither do they have significant distortions.
 
-####2. Model's predictions on the new traffic signs.
+#### 2. Model's predictions on the new traffic signs.
 
 Here are the results of the prediction:
 
@@ -162,7 +162,7 @@ Here are the results of the prediction:
 
 Accuracy of predictions for new images was 0.8333. This is lower than the accuracy for the test set of 0.937. Explanation is quite simple, the set of new images is too small and one error makes overall accuracy much lower than test set accuracy. For a more valid assessment, in my opinion, a larger set of new images is needed. 
 
-####3. Softmax probabilities for all new signs.
+#### 3. Softmax probabilities for all new signs.
 
 The code for making predictions on my final model is located in the 62th cell of the Ipython notebook.
 
@@ -181,3 +181,5 @@ The only image for which the model is not confident, turns out to be the image w
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### I decided not to provide discussion for neural network visualization.
+
+
